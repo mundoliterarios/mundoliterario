@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Livros - Livraria</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="banner">
+        <img src="banner1.png" alt="Bem Vindo ao Mundo Literário" class="responsive-banner">
+    </header>
+    
+    <main>
+        <section class="content">
+            <h2>Sobre Nós</h2>
+            <p>Estamos aqui para trazer a melhor experiência de leitura para você.</p>
+        </section>
+
+        <section class="book-gallery">
+            <h2>Catálogo de Livros Novos</h2>
+            <div class="book-item">
+                <a href="Diario de um banana - A Verdade Nua e Crua.html">
+                    <img src="Diario de um banana - A Verdade Nua e Crua.png" alt="Livro 1">
+                    <div class="overlay">
+                        <p>Leia</p>
+                    </div>
+                </a>
+            </div>
+            <div class="book-item">
+                <a href="Diario de um Banana - Vai ou Racha.html">
+                    <img src="Diario de um Banana - Vai ou Racha.png" alt="Livro 2">
+                    <div class="overlay">
+                        <p>Leia</p>
+                    </div>
+                </a>
+            </div>
+            <div class="book-item">
+                <a href="Diário de um Banana - Casa dos Horrores.html">
+                    <img src="Diário de um Banana - Casa dos Horrores .png" alt="Livro 3">
+                    <div class="overlay">
+                        <p>Leia</p>
+                    </div>
+                </a>
+            </div>
+            <div class="book-item">
+                <a href="Diario de um Banana - Vai ou Racha.html">
+                    <img src="Diario de um Banana - Vai ou Racha.png" alt="Livro 4">
+                    <div class="overlay">
+                        <p>Leia</p>
+                    </div>
+                </a>
+            </div>
+            <div class="book-item">
+                <a href="Diario de um banana - Rodrick é o cara.html">
+                    <img src="Diario de um banana - Rodrick é o cara.png" alt="Livro 5">
+                    <div class="overlay">
+                        <p>Leia</p>
+                    </div>
+                </a>
+            </div>
+            <div class="book-item">
+                <a href="Diario de um Banana - Dias de cão.html">
+                    <img src="Diario de um Banana - Dias de cão.png" alt="Livro 6">
+                    <div class="overlay">
+                        <p>Leia</p>
+                    </div>
+                </a>
+            </div>
+            <div class="book-item">
+                <a href="Os segredos da mente milionária.html">
+                    <img src="Os segredos da mente milionária.png" alt="Livro 6">
+                    <div class="overlay">
+                        <p>Leia</p>
+                    </div>
+                </a>
+            </div>
+            <div class="book-item">
+                <a href="As 48 leis do poder.html">
+                    <img src="As 48 leis do poder.png" alt="Livro 6">
+                    <div class="overlay">
+                        <p>Leia</p>
+                    </div>
+                </a>
+            </div>
+            <div class="book-item">
+                <a href="Como Fazer Amigos e Influenciar Pessoas.html">
+                    <img src="Como Fazer Amigos e Influenciar Pessoas.png" alt="Livro 6">
+                    <div class="overlay">
+                        <p>Leia</p>
+                    </div>
+                </a>
+            </div>
+            <div class="book-item">
+                <a href="Desbloqueie o poder da sua mente.html">
+                    <img src="Desbloqueie o poder da sua mente.png" alt="Livro 6">
+                    <div class="overlay">
+                        <p>Leia</p>
+                    </div>
+                </a>
+            </div><div class="book-item">
+                <a href="Harry Potter e a Pedra Filosofal.html">
+                    <img src="Harry Potter e a Pedra Filosofal.png" alt="Livro 6">
+                    <div class="overlay">
+                        <p>Leia</p>
+                    </div>
+                </a>
+            </div><div class="book-item">
+                <a href="Mais esperto que o Diabo.html">
+                    <img src="Mais esperto que o Diabo.png" alt="Livro 6">
+                    <div class="overlay">
+                        <p>Leia</p>
+                    </div>
+                </a>
+            </div>
+
+
+    <script>
+        function searchBook() {
+            const input = document.getElementById('search-input').value.toLowerCase();
+            let bookFound = false;
+
+            const books = {
+                "diário de um banana": "diario-de-um-banana.html",
+                "como fazer amigos e influenciar pessoas": "Como-Fazer-Amigos-e-Influenciar-Pessoas-Dale-Carnegie_.html",
+                "meu pé de laranja lima": "Meu-pé-de-laranja-lima.html",
+                "as 48 leis do poder": "as-48-leis-do-poder-robert-greene.html",
+                "capitães da areia": "capitaes-da-areia.html",
+                "os sete maridos": "Os-Sete-Maridos.html",
+                "livro 5": "livro5.html"
+            };
+
+            for (let book in books) {
+                if (input === book) {
+                    window.location.href = books[book];
+                    bookFound = true;
+                    break;
+                }
+            }
+
+            if (!bookFound) {
+                alert('Livro não encontrado!');
+            }
+        }
+    </script>
+</body>
+</html>

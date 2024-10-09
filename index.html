@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificar Chave VIP</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        h1 {
+            color: #ffcc00;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 80%;
+            margin-bottom: 20px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border: 2px solid #ffcc00;
+            outline: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #ffcc00;
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background-color: #ffd700;
+            transform: scale(1.05);
+        }
+
+        #response {
+            margin-top: 20px;
+            font-size: 18px;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .valid {
+            color: #00ff00;
+        }
+
+        .invalid {
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Insira sua Chave VIP</h1>
+        <form id="keyForm">
+            <input type="text" id="vipKey" placeholder="Digite sua chave VIP" required>
+            <button type="submit">Verificar</button>
+        </form>
+        <div id="response"></div>
+    </div>
+
+    <!-- Firebase SDK versão 9+ -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCnQlafdYvqND_mcKSNQr-o8IsRJLfcqZo",
+            authDomain: "keys1-27bb6.firebaseapp.com",
+            databaseURL: "https://keys1-27bb6-default-rtdb.firebaseio.com",
+            projectId: "keys1-27bb6",
+            storageBucket: "keys1-27bb6.appspot.com",
+            messagingSenderId: "909150271276",
+            appId: "1:909150271276:web:116c2abc976869ea92de89"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        // Verificação da chave VIP
+        document.getElementById("keyForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            const vipKey = document.getElementById("vipKey").value.trim();
+            const response = document.getElementById("response");
+
+            // Acessando o banco de dados e verificando a chave
+            try {
+                const dbRef = ref(database);
+                const snapshot = await get(child(dbRef, `keys/${vipKey}`));
+
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    const currentDate = new Date();
+                    const expiryDate = new Date(data.expiry);
+
+                    if (currentDate <= expiryDate) {
+                        response.innerHTML = "Chave válida! Bem-vindo VIP.";
+                        response.className = "valid";
+                        response.style.opacity = 1;
+                        setTimeout(() => {
+                            window.location.href = 'home.html';
+                        }, 2000);
+                    } else {
+                        response.innerHTML = "Chave inválida: Data de expiração passada.";
+                        response.className = "invalid";
+                        response.style.opacity = 1;
+                    }
+                } else {
+                    response.innerHTML = "Chave inválida.";
+                    response.className = "invalid";
+                    response.style.opacity = 1;
+                }
+            } catch (error) {
+                response.innerHTML = "Erro ao verificar a chave.";
+                response.className = "invalid";
+                response.style.opacity = 1;
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+</html>
